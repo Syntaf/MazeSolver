@@ -1,0 +1,8 @@
+#!/bin/bash
+for fname in mazeFile*
+do
+	base=${fname%.txt}
+	base=${base#mazeFile}
+	echo Building maze${base}.jpg
+	./maze_ppm 5 < "$fname" | convert - "maze${base}.jpg"
+done
