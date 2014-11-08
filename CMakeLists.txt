@@ -21,14 +21,18 @@ configure_file(
 set(HEADERS
 				src/mazeGen/disjointSets.hpp
 				src/mazeGen/mazeGen.hpp
+				src/mazeGen/cls.hpp
 )
 
 set(SOURCES
 				src/mazeGen/disjointSets.cpp
 				src/mazeGen/mazeGen.cpp
+				src/main.cpp
 )
 
 include_directories("${PROJECT_BINARY_DIR}")
+include_directories("${PROJECT_SOURCE_DIR}/src/mazeGen")
+include_directories("${PROJECT_SOURCE_DIR}/src/mazeSolve")
 
 add_executable(${EXECUTABLE_NAME} ${SOURCES} ${HEADERS})
 

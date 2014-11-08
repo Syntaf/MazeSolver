@@ -1,6 +1,6 @@
 #include <iostream>
 #include <iomanip>
-#include "disjointSets.h"
+#include "disjointSets.hpp"
 
 disjointSets::disjointSets(int param):
   setSize(param)

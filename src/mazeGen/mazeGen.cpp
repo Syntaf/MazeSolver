@@ -2,8 +2,8 @@
 #include <fstream>
 #include <cstdlib>
 #include <algorithm>
-#include "mazeGen.h"
-#include "disjointSets.h"
+#include "mazeGen.hpp"
+#include "disjointSets.hpp"
 
 bool comp (int *i, int *j) { return i[0] < j[0]; }
 
@@ -90,11 +90,14 @@ bool mazeGen::printMazeData(const std::string filename) const
 	//open file and output contents of walls array, ONLY
 	//write walls that are valid(not -1)
   std::ofstream outFile(filename.c_str());
+  if(!outFile.is_open())
+	  return false;
   outFile << "ROWS " << rows << " COLS " << cols << std::endl;
   for(int i = 0; i < arrSize; i++)
     if(walls[i][0] != -1 && walls[i][1] != -1)
 		outFile << "WALL " << walls[i][0] << " " << walls[i][1] << std::endl;
   outFile.close();
+  return true;
 }
 
 void mazeGen::printMazeText() const
