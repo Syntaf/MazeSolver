@@ -9,7 +9,6 @@
 
 #include "config.h"
 #include "mazeGen.hpp"
-#include "cls.hpp"
 
 using namespace std;
 
@@ -22,7 +21,7 @@ int main(int argc, char *argv[])
 //  Headers...
 
 	string	stars, bars, dashes;
-	string	fName;
+	string	fName = "mazeDataFile.txt";
 	stars.append(65, '*');
 	bars.append(65, '=');
 	dashes.append(40,'-');
@@ -78,18 +77,17 @@ int main(int argc, char *argv[])
 		}
 		std::cout << "\ncreating maze...\n";
 		mazeGen obj(rows, cols);
-		std::cout << "generating maze...\n";
+		std::cout << "done, generating maze...\n";
 		obj.generate();
-		std::cout << "generating done";
+		std::cout << "done, creating data file...\n";
+		obj.printMazeData(fName);
+		std::cout << "done, calling python solver...\n";
+		std::cout << "done";
 		if(doPrint){
-			std::cout << ", printing...\n\n";
+			std::cout << ", printing solution...\n\n";
 			obj.printMazeText();
 		}else
 			std::cout << "...\n";
-
-		std::cout << "\ndone, creating data file...\n";
-		fName = "mazeFile.txt";
-		obj.printMazeData(fName);
 	}
 // *****************************************************************
 //  All done.
