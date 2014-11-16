@@ -21,7 +21,6 @@ configure_file(
 set(HEADERS
 				src/mazeGen/disjointSets.hpp
 				src/mazeGen/mazeGen.hpp
-				src/mazeGen/cls.hpp
 )
 
 set(SOURCES
@@ -30,9 +29,19 @@ set(SOURCES
 				src/main.cpp
 )
 
+#set(Boost_USE_STATIC_LIBS OFF)
+#set(Boost_USE_MULTITHREADED ON)
+#set(Boost_USE_STATIC_RUNTIME OFF)
+#find_package(Boost COMPONENTS python REQUIRED)
+
 include_directories("${PROJECT_BINARY_DIR}")
 include_directories("${PROJECT_SOURCE_DIR}/src/mazeGen")
 include_directories("${PROJECT_SOURCE_DIR}/src/mazeSolve")
 
-add_executable(${EXECUTABLE_NAME} ${SOURCES} ${HEADERS})
+#if(Boost_FOUND)
+#		include_directories(${Boost_INCLUDE_DIRS})
+#		target_link_libraries(${EXECUTABLE_NAME} ${Boost_LIBRARIES})
+#endif()
 
+add_executable(${EXECUTABLE_NAME} ${SOURCES} ${HEADERS})
+	
