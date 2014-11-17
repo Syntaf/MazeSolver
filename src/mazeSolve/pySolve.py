@@ -5,5 +5,23 @@ fName = "mazeDataFile.txt"
 with open(fName) as f:
 		content = f.readlines()
 
+ROWS = None
+COLS = None
+
+#get rows and columns in text file from first line
+words = content[0].split(" ")
+for c in range(0,len(words)):
+	if words[c] == "ROWS":
+		ROWS = words[c+1]
+	elif words[c] == "COLS":
+		COLS = words[c+1]
+
+#create empty maze
+maze_map[ROWS][COLS] = None
+
+#loop through and establish walls
 for h in content:
-		print(h, end="")
+
+
+
+print("Number of rows and columns: ", ROWS, COLS)
