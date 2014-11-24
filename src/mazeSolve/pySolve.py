@@ -16,12 +16,9 @@ for c in range(0,len(words)):
 	elif words[c] == "COLS":
 		COLS = words[c+1]
 
-#create empty maze
-maze_map[ROWS][COLS] = None
+#create empty list
+maze_map = [[0 for x in range(int(COLS))] for x in range(int(ROWS))]
 
 #loop through and establish walls
 for h in content:
-
-
-
-print("Number of rows and columns: ", ROWS, COLS)
+	print(h, end="")
