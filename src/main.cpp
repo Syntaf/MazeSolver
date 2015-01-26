@@ -29,8 +29,6 @@ int main(int argc, char *argv[])
 	const char* unbold   = "\033[0m";
 	bool	doPrint=false;
 
-	//clear screen;
-	system("cls");
 	cout << "Maze Generator" << unbold << endl;
 	cout << endl;
 

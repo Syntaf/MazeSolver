@@ -1,0 +1,1 @@
+/usr/bin/c++   -O3 -DNDEBUG    CMakeFiles/MazeSovler.dir/src/mazeGen/disjointSets.cpp.o CMakeFiles/MazeSovler.dir/src/mazeGen/mazeGen.cpp.o CMakeFiles/MazeSovler.dir/src/main.cpp.o  -o MazeSovler -rdynamic 
