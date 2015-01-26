@@ -87,8 +87,9 @@ void mazeGen::generate()
 
 bool mazeGen::printMazeData(const std::string filename) const
 {
-	//open file and output contents of walls array, ONLY
-	//write walls that are valid(not -1)
+  /* 
+  //open file and output contents of walls array, ONLY
+  //write walls that are valid(not -1)
   std::ofstream outFile(filename.c_str());
   if(!outFile.is_open())
 	  return false;
@@ -98,6 +99,58 @@ bool mazeGen::printMazeData(const std::string filename) const
 		outFile << "WALL " << walls[i][0] << " " << walls[i][1] << std::endl;
   outFile.close();
   return true;
+  */
+  std::ofstream outFile(filename.c_str());
+  if(!outfile.is_open())
+    return false;
+	
+  outFile << "+  +";
+	for(int i = 0; i < cols-1; i++)
+		outFile << "--+";
+	outFile << std::endl;
+
+	//begin looking through every column and place a '|' when a wall appears
+	for(int i = 1, r = 0; i < rows*2;r += (i-1) % 2, i++) {
+		if(i % 2 == 0) {
+			outFile << "+";
+			for(int j = 0; j < cols; j++) {
+				bool fnd = false;
+				for(int h = 0; h < arrSize; h++) {
+					if(walls[h][0] == j+r*cols && walls[h][1] == j+r*cols+cols) {
+						outFile << "--+";
+						fnd = true;
+						break;
+					}
+				}
+				if(!fnd)
+					outFile << "  +";
+			}
+		}else{
+			outFile << "|";
+			for(int j = 0; j < cols-1; j++) {				
+				bool fnd = false;
+				for(int h = 0; h < arrSize; h++) {
+					if(walls[h][0] == r*cols+j && walls[h][1] == r*cols+j+1) {
+						outFile << "  |";
+						fnd = true;
+						break;
+					}
+				}
+				if(!fnd)
+					outFile << "   ";
+			}
+		}
+		if(i % 2 != 0) {
+			outFile << "  |";
+		}
+		outFile << std::endl;
+	}
+
+	//print out bottom bounding line
+	for(int i = 0; i < cols-1; i++)
+		outFile << "+--";
+	outFile << "+  +";
+	outFile << std::endl;
 }
 
 void mazeGen::printMazeText() const
