@@ -101,7 +101,7 @@ bool mazeGen::printMazeData(const std::string filename) const
   return true;
   */
   std::ofstream outFile(filename.c_str());
-  if(!outfile.is_open())
+  if(!outFile.is_open())
     return false;
 	
   outFile << "+  +";

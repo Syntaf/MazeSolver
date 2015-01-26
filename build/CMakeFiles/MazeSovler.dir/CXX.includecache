@@ -6,36 +6,6 @@
 
 #IncludeRegexTransform: 
 
-../src/mazeGen/mazeGen.hpp
-string
--
-
-/home/gmercer/Github/MazeSolver/src/main.cpp
-iostream
--
-iomanip
--
-string
--
-cstdlib
--
-sstream
--
-time.h
--
-config.h
-/home/gmercer/Github/MazeSolver/src/config.h
-mazeGen.hpp
-/home/gmercer/Github/MazeSolver/src/mazeGen.hpp
-
-/home/gmercer/Github/MazeSolver/src/mazeGen/disjointSets.cpp
-iostream
--
-iomanip
--
-disjointSets.hpp
-/home/gmercer/Github/MazeSolver/src/mazeGen/disjointSets.hpp
-
 /home/gmercer/Github/MazeSolver/src/mazeGen/disjointSets.hpp
 
 /home/gmercer/Github/MazeSolver/src/mazeGen/mazeGen.cpp
@@ -55,6 +25,4 @@ disjointSets.hpp
 /home/gmercer/Github/MazeSolver/src/mazeGen/mazeGen.hpp
 string
 -
-
-config.h
 

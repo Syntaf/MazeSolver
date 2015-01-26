@@ -1,82 +1,21 @@
-ROWS 10 COLS 10
-WALL 77 78
-WALL 34 44
-WALL 76 77
-WALL 84 85
-WALL 37 47
-WALL 3 13
-WALL 17 18
-WALL 36 46
-WALL 78 79
-WALL 75 85
-WALL 56 57
-WALL 73 83
-WALL 86 87
-WALL 53 63
-WALL 62 72
-WALL 82 83
-WALL 6 16
-WALL 41 51
-WALL 81 91
-WALL 23 33
-WALL 74 84
-WALL 26 27
-WALL 14 24
-WALL 45 55
-WALL 97 98
-WALL 20 30
-WALL 91 92
-WALL 63 73
-WALL 53 54
-WALL 30 31
-WALL 67 68
-WALL 63 64
-WALL 17 27
-WALL 9 19
-WALL 86 96
-WALL 42 52
-WALL 51 61
-WALL 65 66
-WALL 5 15
-WALL 37 38
-WALL 56 66
-WALL 34 35
-WALL 70 80
-WALL 27 37
-WALL 49 59
-WALL 25 35
-WALL 32 42
-WALL 89 99
-WALL 39 49
-WALL 28 29
-WALL 32 33
-WALL 69 79
-WALL 47 48
-WALL 4 5
-WALL 22 32
-WALL 50 60
-WALL 58 68
-WALL 83 84
-WALL 21 22
-WALL 2 3
-WALL 10 20
-WALL 29 39
-WALL 71 81
-WALL 12 13
-WALL 60 70
-WALL 15 25
-WALL 59 69
-WALL 96 97
-WALL 26 36
-WALL 46 47
-WALL 24 25
-WALL 71 72
-WALL 10 11
-WALL 65 75
-WALL 64 65
-WALL 11 12
-WALL 1 2
-WALL 41 42
-WALL 45 46
-WALL 92 93
-WALL 18 28
++  +--+--+--+--+--+--+--+--+--+
+|     |  |     |              |
++  +  +  +--+  +--+--+  +  +--+
+|  |  |  |              |     |
++--+  +  +  +--+--+  +--+--+  +
+|     |        |     |     |  |
++--+  +--+--+  +--+--+--+  +--+
+|  |     |     |        |     |
++  +  +--+  +--+  +--+--+  +--+
+|     |           |  |  |     |
++  +--+--+  +  +--+  +  +  +--+
+|           |        |        |
++--+--+  +--+  +  +--+  +--+--+
+|           |  |  |     |     |
++--+  +--+--+  +--+  +  +  +--+
+|     |              |  |  |  |
++--+--+  +--+--+--+  +  +  +  +
+|        |  |  |     |        |
++  +--+  +  +  +  +--+  +  +--+
+|     |  |           |  |     |
++--+--+--+--+--+--+--+--+--+  +
