@@ -6,6 +6,7 @@
 #include <cstdlib>
 #include <sstream>
 #include <time.h>
+#include <Python.h>
 
 #include "config.h"
 #include "mazeGen.hpp"

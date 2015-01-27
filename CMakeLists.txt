@@ -10,6 +10,7 @@ if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
 						"MinSizeRel" "RelWithDebInfo")
 endif()
 
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 set(EXECUTABLE_NAME "MazeSovler")
 set(VERSION_MAJOR 0)
 set(VERSION_MINOR 1)
@@ -19,14 +20,18 @@ configure_file(
 				)
 
 set(HEADERS
-				src/mazeGen/disjointSets.hpp
-				src/mazeGen/mazeGen.hpp
+				src/backend/disjointSets.hpp
+				src/backend/mazeGen.hpp
 )
 
 set(SOURCES
-				src/mazeGen/disjointSets.cpp
-				src/mazeGen/mazeGen.cpp
+				src/backend/disjointSets.cpp
+				src/backend/mazeGen.cpp
 				src/main.cpp
+)
+
+set(RUNTIME_DEPENDENCIES
+                src/frontend/pySolve.py
 )
 
 #set(Boost_USE_STATIC_LIBS OFF)
@@ -34,9 +39,13 @@ set(SOURCES
 #set(Boost_USE_STATIC_RUNTIME OFF)
 #find_package(Boost COMPONENTS python REQUIRED)
 
+set(Python_ADDITIONAL_VERSIONS 3.4)
+find_package(PythonLibs REQUIRED)
+include_directories(${PYTHON_INCLUDE_DIRS})
+
 include_directories("${PROJECT_BINARY_DIR}")
-include_directories("${PROJECT_SOURCE_DIR}/src/mazeGen")
-include_directories("${PROJECT_SOURCE_DIR}/src/mazeSolve")
+include_directories("${PROJECT_SOURCE_DIR}/src/backend")
+include_directories("${PROJECT_SOURCE_DIR}/src/frontend")
 
 #if(Boost_FOUND)
 #		include_directories(${Boost_INCLUDE_DIRS})
