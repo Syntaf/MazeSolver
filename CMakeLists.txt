@@ -53,4 +53,12 @@ include_directories("${PROJECT_SOURCE_DIR}/src/frontend")
 #endif()
 
 add_executable(${EXECUTABLE_NAME} ${SOURCES} ${HEADERS})
-	
+
+#copy runtime deps
+add_custom_target(copy_runtime_dependencies ALL)
+foreach(RUNTIME_DEPENDENCY ${RUNTIME_DEPENDENCIES})
+    add_custom_command(TARGET copy_runtime_dependencies POST_BUILD
+                       COMMAND ${CMAKE_COMMAND} -E copy
+                       ${CMAKE_SOURCE_DIR}/${RUNTIME_DEPENDENCY}
+                       $<TARGET_FILE_DIR:${EXECUTABLE_NAME}>/${RUNTIME_DEPENDENCY})
+endforeach()
