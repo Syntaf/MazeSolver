@@ -34,25 +34,16 @@ set(RUNTIME_DEPENDENCIES
                 src/frontend/pySolve.py
 )
 
-#set(Boost_USE_STATIC_LIBS OFF)
-#set(Boost_USE_MULTITHREADED ON)
-#set(Boost_USE_STATIC_RUNTIME OFF)
-#find_package(Boost COMPONENTS python REQUIRED)
-
-set(Python_ADDITIONAL_VERSIONS 3.4)
-find_package(PythonLibs REQUIRED)
-include_directories(${PYTHON_INCLUDE_DIRS})
-
 include_directories("${PROJECT_BINARY_DIR}")
 include_directories("${PROJECT_SOURCE_DIR}/src/backend")
 include_directories("${PROJECT_SOURCE_DIR}/src/frontend")
 
-#if(Boost_FOUND)
-#		include_directories(${Boost_INCLUDE_DIRS})
-#		target_link_libraries(${EXECUTABLE_NAME} ${Boost_LIBRARIES})
-#endif()
-
 add_executable(${EXECUTABLE_NAME} ${SOURCES} ${HEADERS})
+
+set(Python_ADDITIONAL_VERSIONS 3.4)
+find_package(PythonLibs REQUIRED)
+include_directories(${PYTHON_INCLUDE_DIRS})
+target_link_libraries(${EXECUTABLE_NAME} ${PYTHON_LIBRARIES})
 
 #copy runtime deps
 add_custom_target(copy_runtime_dependencies ALL)
