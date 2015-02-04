@@ -13,6 +13,8 @@
 
 using namespace std;
 
+const char * SCRIPT = "pySolve.py";
+
 void parseInput(std::string input, int& row, int& col);
 
 int main(int argc, char *argv[])
@@ -20,7 +22,8 @@ int main(int argc, char *argv[])
 
 // *****************************************************************
 //  Headers...
-
+    PyObject *pName, *pModule, *pFunc;
+    PyObject *pArgs, *pValue;
 	string	stars, bars, dashes;
 	string	fName = "mazeDataFile.txt";
 	stars.append(65, '*');
@@ -81,6 +84,48 @@ int main(int argc, char *argv[])
 		std::cout << "done, creating data file...\n";
 		obj.printMazeData(fName);
 		std::cout << "done, calling python solver...\n";
+        Py_Initialize();
+            pName = PyUnicode_FromString(SCRIPT);
+            pModule = PyImport_Import(pName);
+            Py_DECREF(pName);
+
+            if(pModule != NULL) {
+                pFunc = PyObject_GetAttrString(pModule, "test");
+
+                if(pFunc && PyCallable_Check(pFunc)) {
+                    pArgs = PyTuple_New(1);
+                    pValue = PyUnicode_FromString("data.out");
+                    if(!pValue) {
+                        Py_DECREF(pArgs);
+                        Py_DECREF(pModule);
+                        std::cout << "Cannot convert args...\n";
+                        return -1;
+                    }
+                    PyTuple_SetItem(pArgs, 0, pValue);
+                    Py_DECREF(pArgs);
+                    if(pValue != NULL) {
+                        std::cout << "Done...\n";
+                        Py_DECREF(pValue);
+                    } else {
+                        Py_DECREF(pFunc);
+                        Py_DECREF(pModule);
+                        PyErr_Print();
+                        std::cout << "Call failed\n";
+                        return -1;
+                    }
+                } else {
+                    if(PyErr_Occurred())
+                        PyErr_Print();
+                    std::cout << "Cannot find function " << SCRIPT << "...\n";
+                }
+                Py_XDECREF(pFunc);
+                Py_DECREF(pModule);
+            } else {
+                PyErr_Print();
+                std::cout << "Failed to load...\n";
+                return -1;
+            }
+        Py_Finalize();
 		std::cout << "done";
 		if(doPrint){
 			std::cout << ", printing solution...\n\n";
