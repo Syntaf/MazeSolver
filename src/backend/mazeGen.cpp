@@ -2,6 +2,8 @@
 #include <fstream>
 #include <cstdlib>
 #include <algorithm>
+#include <vector>
+#include "astar.hpp"
 #include "mazeGen.hpp"
 #include "disjointSets.hpp"
 
@@ -204,6 +206,39 @@ void mazeGen::printMazeText() const
 		std::cout << "+--";
 	std::cout << "+  +";
 	std::cout << std::endl;
+}
+
+void mazeGen::findPath()
+{
+    std::ifstream inFile("mazeDataFile.txt");
+    std::vector<std::vector<char> > maze_map;
+    std::string line;
+    while(std::getline(inFile, line)) {
+        std::vector<char> row;
+        for(int i = 0; i < line.length(); i++) {
+            row.push_back(line[i]);
+        }
+        maze_map.push_back(row);
+    }
+
+    std::string route = AStar::findPath(1, 1, maze_map.size(), maze_map[0].size(), AStar::makeReadyMap(maze_map));
+
+    int x = 0;
+    int y = 0;
+    for(int i = 0; i < route.length(); i++) {
+        char c = route[i];
+        int j = atoi(&c);
+        x = x + dx[j];
+        y = y + dy[j];
+        maze_map[x][y] = 'X';
+    }
+
+    for(int i = 0; i < maze_map.size(); i++) {
+        for(int j = 0; j < maze_map[0].size(); j++) { 
+            std::cout << maze_map[i][j];
+        }
+        std::cout << std::endl;
+    }
 }
 
 void mazeGen::randomize()

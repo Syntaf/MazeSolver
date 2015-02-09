@@ -12,6 +12,7 @@ class mazeGen
     void generate();
     bool printMazeData(const std::string) const;
     void printMazeText() const;
+    void findPath();
     void randomize();
   private:
     int arrSize;
