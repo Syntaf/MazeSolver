@@ -58,6 +58,7 @@ int main(int argc, char *argv[])
 //  Begin loop
 	int rows, cols;
 	std::string input;
+    std::string path;
 	while(true){
 		std::cout << "Enter the number of ROWS and COLS(return to exit): ";
 		std::getline(cin, input);

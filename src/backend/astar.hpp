@@ -73,11 +73,13 @@ namespace AStar {
     {
 	    //shortcut for size of array entered
         const int n = map.size();
-
+        std::cout << n << std::endl;
 	    //arrays used for A-star algorithm
-        int closed_nodes_map[n][n];
-        int open_nodes_map[n][n];
-        int dir_map[n][n];
+        std::vector<std::vector<int> > closed_nodes_map(n, std::vector<int>(n));
+        std::vector<std::vector<int> > open_nodes_map(n, std::vector<int>(n));
+        std::vector<std::vector<int> > dir_map(n, std::vector<int>(n));
+        std::cout << closed_nodes_map[0][0] << std::endl;
+        std::cout << open_nodes_map[0][0] << std::endl;
 
 	    //other variables needed during algorithm
         std::priority_queue<node> pq[2];
@@ -94,13 +96,13 @@ namespace AStar {
                 open_nodes_map[x][y] = 0;
             }
         }
-
+        x = 0; y = 1;
 	    //create start node and push into list of open nodes
         n0 = new node(xStart, yStart, 0, 0);
         n0->updatePriority(xFinish, yFinish);
         pq[pqi].push(*n0);
+        std::cout << n0->getPriority() << " " << x << " " << y << std::endl;
         open_nodes_map[x][y] = n0->getPriority(); //mark on map
-
 	    //run through priority queue
         while(!pq[pqi].empty()) {
 		    //get the current node w/ highest priority
