@@ -73,13 +73,10 @@ namespace AStar {
     {
 	    //shortcut for size of array entered
         const int n = map.size();
-        std::cout << n << std::endl;
 	    //arrays used for A-star algorithm
         std::vector<std::vector<int> > closed_nodes_map(n, std::vector<int>(n));
         std::vector<std::vector<int> > open_nodes_map(n, std::vector<int>(n));
         std::vector<std::vector<int> > dir_map(n, std::vector<int>(n));
-        std::cout << closed_nodes_map[0][0] << std::endl;
-        std::cout << open_nodes_map[0][0] << std::endl;
 
 	    //other variables needed during algorithm
         std::priority_queue<node> pq[2];
@@ -91,7 +88,7 @@ namespace AStar {
 
 	    //set all node maps to zero
         for(y = 0; y < n; y++) {
-            for(x = 0; x < n; x++) {
+            for(x = 0; x < n; x++) { 
                 closed_nodes_map[x][y] = 0;
                 open_nodes_map[x][y] = 0;
             }
@@ -101,7 +98,6 @@ namespace AStar {
         n0 = new node(xStart, yStart, 0, 0);
         n0->updatePriority(xFinish, yFinish);
         pq[pqi].push(*n0);
-        std::cout << n0->getPriority() << " " << x << " " << y << std::endl;
         open_nodes_map[x][y] = n0->getPriority(); //mark on map
 	    //run through priority queue
         while(!pq[pqi].empty()) {
@@ -120,6 +116,7 @@ namespace AStar {
 		    //mark node as closed
             closed_nodes_map[x][y] = 1;
 
+            std::cout << x << "," << y << " : " << xFinish << "," << yFinish << std::endl;
 		    //quit searching when the goal state is reached
             if(x == xFinish && y == yFinish) {
 			    //generate path from finish to start by
@@ -210,6 +207,15 @@ namespace AStar {
                 }
             }
         }
+        
+
+        for(int i = 0; i < resmap.size(); i++) {
+            for(int j = 0; j < resmap[0].size(); j++) {
+                std::cout << resmap[i][j];
+            }
+            std::cout << std::endl;
+        }
+
         return resmap;
     }
 

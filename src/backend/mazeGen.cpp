@@ -210,19 +210,37 @@ void mazeGen::printMazeText() const
 
 void mazeGen::findPath()
 {
-    std::ifstream inFile("mazeDataFile.txt");
-    std::vector<std::vector<char> > maze_map;
-    std::string line;
-    while(std::getline(inFile, line)) {
-        std::vector<char> row;
-        for(int i = 0; i < line.length(); i++) {
-            row.push_back(line[i]);
-        }
-        maze_map.push_back(row);
+    std::vector< std::vector<char> > maze_map;
+    typedef std::istreambuf_iterator<char> buf_iter;
+    std::fstream file("mazeDataFile.txt");
+    std::vector<char> tmp;
+    maze_map.push_back(tmp);                    // push back initial front wall
+    tmp.push_back('|');                         // create left wall for each row
+    for(buf_iter i(file), e; i != e; ++i) {     // loop file
+        char c = *i;                            // get char
+        if(c == '\n') {                         // if end of line, new row
+            tmp.push_back('|');                 // create right wall
+            maze_map.push_back(tmp);            // push row in
+            tmp.clear();                        // clear tmp
+            tmp.push_back('|');                 // re add new left wall
+        } else {
+            tmp.push_back(c);                   // push char into row
+        }    
+    }
+    tmp.clear();                        // clear tmp
+    std::fill_n(back_inserter(maze_map[0]), maze_map[1].size(), '-');
+    std::fill_n(back_inserter(tmp), maze_map[1].size(), '-');
+    maze_map.push_back(tmp);
+
+    for(int i = 0; i < maze_map.size(); i++) {
+        for(int j = 0; j < maze_map[0].size(); j++) {
+            std::cout << maze_map[i][j];
+        }    
+        std::cout << std::endl;
     }
 
-    std::string route = AStar::findPath(1, 1, maze_map.size(), maze_map[0].size(), AStar::makeReadyMap(maze_map));
-
+    std::string route = AStar::findPath(2, 1, maze_map.size() - 1, maze_map[0].size() - 2, AStar::makeReadyMap(maze_map));
+    std::cout << route << std::endl;
     int x = 0;
     int y = 0;
     for(int i = 0; i < route.length(); i++) {

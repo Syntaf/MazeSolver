@@ -84,10 +84,10 @@ int main(int argc, char *argv[])
 		std::cout << "done, calling solver...\n";
         obj.findPath();
 		std::cout << "done...\n";
-		if(doPrint){
-			std::cout << ", printing solution...\n\n";
-			obj.printMazeText();
-		}else
+		//if(doPrint){
+			//std::cout << ", printing solution...\n\n";
+			//obj.printMazeText();
+		//}else
 			std::cout << "...\n";
 	}
 // *****************************************************************
