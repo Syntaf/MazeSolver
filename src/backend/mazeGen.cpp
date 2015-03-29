@@ -239,8 +239,9 @@ void mazeGen::findPath()
         std::cout << std::endl;
     }
 
-    std::string route = AStar::findPath(2, 1, maze_map.size() - 1, maze_map[0].size() - 2, AStar::makeReadyMap(maze_map));
-    std::cout << route << std::endl;
+    std::cout << maze_map[2][3] << " " << maze_map[maze_map.size()-2][ maze_map[0].size()-3] << std::endl;
+
+    std::string route = AStar::findPath(3, 3, maze_map.size()-3, maze_map.size()-2, AStar::makeReadyMap(maze_map));
     int x = 0;
     int y = 0;
     for(int i = 0; i < route.length(); i++) {
@@ -248,7 +249,8 @@ void mazeGen::findPath()
         int j = atoi(&c);
         x = x + dx[j];
         y = y + dy[j];
-        maze_map[x][y] = 'X';
+        std::cout << x+2 << "," << y+2 << std::endl;
+        maze_map[x+2][y+2] = 'X';
     }
 
     for(int i = 0; i < maze_map.size(); i++) {

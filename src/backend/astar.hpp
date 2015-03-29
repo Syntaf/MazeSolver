@@ -6,9 +6,19 @@
 #include <math.h>
 #include <ctime>
 
-const int dir=8;
-static int dx[dir] = {1, 1, 0, -1, -1, -1, 0, 1};
-static int dy[dir] = {0, 1, 1, 1, 0, -1, -1, -1};
+void printMap(std::vector<std::vector<int> > &map)
+{
+    for(int r = 0; r < map.size(); r++) {
+        for(int c = 0; c < map[0].size(); c++) {
+            std::cout << map[r][c];
+        }
+        std::cout << std::endl;
+    }
+}
+
+const int dir=4;
+static int dx[dir] = {1, 0, -1, 0};
+static int dy[dir] = {0, 1, 0, -1};
 
 class node
 {
@@ -73,10 +83,13 @@ namespace AStar {
     {
 	    //shortcut for size of array entered
         const int n = map.size();
+        const int m = map[0].size();
 	    //arrays used for A-star algorithm
         std::vector<std::vector<int> > closed_nodes_map(n, std::vector<int>(n));
         std::vector<std::vector<int> > open_nodes_map(n, std::vector<int>(n));
         std::vector<std::vector<int> > dir_map(n, std::vector<int>(n));
+
+        std::cout << xStart << "," << yStart << "->" << xFinish << "," << yFinish << std::endl;
 
 	    //other variables needed during algorithm
         std::priority_queue<node> pq[2];
@@ -84,16 +97,18 @@ namespace AStar {
         node* n0;
         node* m0;
         int i, j, x, y, xdx, ydy;
-        char c;
 
 	    //set all node maps to zero
         for(y = 0; y < n; y++) {
             for(x = 0; x < n; x++) { 
+                dir_map[x][y] = 0;
                 closed_nodes_map[x][y] = 0;
                 open_nodes_map[x][y] = 0;
             }
         }
-        x = 0; y = 1;
+        char c;
+        std::cout << std::endl << "Starting AStar...\n";
+        x = 0; y = 0;
 	    //create start node and push into list of open nodes
         n0 = new node(xStart, yStart, 0, 0);
         n0->updatePriority(xFinish, yFinish);
@@ -109,19 +124,24 @@ namespace AStar {
 		    //shortcuts
             x = n0->getxPos();
             y = n0->getyPos();
-
+            std::cout << "(" << x << "," << y << ")\n";
 		    //remove node from open list
             pq[pqi].pop();
             open_nodes_map[x][y] = 0;
 		    //mark node as closed
             closed_nodes_map[x][y] = 1;
 
-            std::cout << x << "," << y << " : " << xFinish << "," << yFinish << std::endl;
 		    //quit searching when the goal state is reached
             if(x == xFinish && y == yFinish) {
 			    //generate path from finish to start by
 			    //following the directions
                 std::string path="";
+                for(int i = 0; i < dir_map.size(); i++) {
+                    for(int j = 0; j < dir_map[0].size(); j++) {
+                        std::cout << dir_map[i][j];
+                    }
+                    std::cout << std::endl;
+                }
                 while(!(x == xStart && y == yStart)) {
                     j = dir_map[x][y];
                     c = '0' + (j + dir / 2) % dir;
@@ -137,16 +157,20 @@ namespace AStar {
                 return path;
             }
 
+            std::cin >> c;
+            std::cout << "Starting tests for all possible directions\n";
 		    //generate modes in all possible directions
             for(i = 0; i < dir; i++) {
 			    //more shortcuts
                 xdx = x + dx[i];
                 ydy = y + dy[i];
+                std::cout << "\t* (" << xdx << "," << ydy << ") ... ";
 
 
                 if(!(xdx < 0 || xdx > n-1 || ydy < 0 || ydy > n-1 ||
 				     map[xdx][ydy] == 1 || closed_nodes_map[xdx][ydy] == 1)) {
 				    //create child node
+                    std::cout << "new node! ...\n";
                     m0 = new node( xdx, ydy, n0->getLevel(),
                             n0->getPriority());
                     m0->nextLevel(i);
@@ -154,14 +178,19 @@ namespace AStar {
 
 				    //if not in open list, add into that
                     if(open_nodes_map[xdx][ydy] == 0) {
+                        std::cout << "\t" << open_nodes_map[xdx][ydy] << " == 0 \n";
                         open_nodes_map[xdx][ydy] = m0->getPriority();
                         pq[pqi].push(*m0);
 					    //mark its parent node direction
+                        //std::cout << xdx << "," << ydy << std::endl;
+                        std::cout << "\t" << "Adding (" << xdx << "," << ydy << ")\n";
                         dir_map[xdx][ydy]=(i + dir / 2) % dir;
                     }else if(open_nodes_map[xdx][ydy] > m0->getPriority()) {
+                        std::cout << "\t" << open_nodes_map[xdx][ydy] << " > " << m0->getPriority() << "\n";
 					    //update node priority
                         open_nodes_map[xdx][ydy] = m0->getPriority();
 					    //update parent direction info
+                        //std::cout << xdx << "," << ydy << std::endl;
                         dir_map[xdx][ydy] = (i + dir / 2) % dir;
 
 					    //replace the node by emplacing one pq
@@ -187,10 +216,16 @@ namespace AStar {
 					    //add better node instead
                         pq[pqi].push(*m0);
                     }
-                    else delete m0;
-                }
+                    else{
+                        std::cout << "\t" << "skipping node...\n";
+                        delete m0;
+                    }
+                }else
+                    std::cout << "not valid node...\n";
             }
             delete n0;
+            std::cout << map.size() << "x" << map[0].size() << " <-> " << dir_map.size() << "x" << dir_map[0].size() << std::endl;
+            printMap(dir_map);
         }
         return "";
     }
@@ -220,3 +255,5 @@ namespace AStar {
     }
 
 }
+
+
