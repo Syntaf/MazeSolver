@@ -26,3 +26,7 @@ Windows
 5. hit "Generate".
 
 6. Open up the build folder, double click the Solution file and build the project. All done!
+
+Linux
+---------
+1. `cmake /path/to/repository/source/tree`
