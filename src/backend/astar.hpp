@@ -85,9 +85,9 @@ namespace AStar {
         const int n = map.size();
         const int m = map[0].size();
 	    //arrays used for A-star algorithm
-        std::vector<std::vector<int> > closed_nodes_map(n, std::vector<int>(n));
-        std::vector<std::vector<int> > open_nodes_map(n, std::vector<int>(n));
-        std::vector<std::vector<int> > dir_map(n, std::vector<int>(n));
+        std::vector<std::vector<int> > closed_nodes_map(n, std::vector<int>(m));
+        std::vector<std::vector<int> > open_nodes_map(n, std::vector<int>(m));
+        std::vector<std::vector<int> > dir_map(n, std::vector<int>(m));
 
         std::cout << xStart << "," << yStart << "->" << xFinish << "," << yFinish << std::endl;
 
@@ -99,7 +99,7 @@ namespace AStar {
         int i, j, x, y, xdx, ydy;
 
 	    //set all node maps to zero
-        for(y = 0; y < n; y++) {
+        for(y = 0; y < m; y++) {
             for(x = 0; x < n; x++) { 
                 dir_map[x][y] = 0;
                 closed_nodes_map[x][y] = 0;
@@ -157,7 +157,7 @@ namespace AStar {
                 return path;
             }
 
-            std::cin >> c;
+            //std::cin >> c;
             std::cout << "Starting tests for all possible directions\n";
 		    //generate modes in all possible directions
             for(i = 0; i < dir; i++) {
@@ -167,7 +167,7 @@ namespace AStar {
                 std::cout << "\t* (" << xdx << "," << ydy << ") ... ";
 
 
-                if(!(xdx < 0 || xdx > n-1 || ydy < 0 || ydy > n-1 ||
+                if(!(xdx < 0 || xdx > n-1 || ydy < 0 || ydy > m-1 ||
 				     map[xdx][ydy] == 1 || closed_nodes_map[xdx][ydy] == 1)) {
 				    //create child node
                     std::cout << "new node! ...\n";
@@ -225,7 +225,7 @@ namespace AStar {
             }
             delete n0;
             std::cout << map.size() << "x" << map[0].size() << " <-> " << dir_map.size() << "x" << dir_map[0].size() << std::endl;
-            printMap(dir_map);
+            //printMap(dir_map);
         }
         return "";
     }
