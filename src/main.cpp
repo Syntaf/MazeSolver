@@ -14,90 +14,90 @@ using namespace std;
 
 const char * SCRIPT = "pySolve.py";
 
-void parseInput(std::string input, int& row, int& col);
+bool parseInput(std::string input, int& row, int& col);
 
 int main(int argc, char *argv[])
 {
+    // always writes to "mazeDataFile.txt"
+	const string fName = "mazeDataFile.txt";
+	bool doPrint = false;
 
-// *****************************************************************
-//  Headers...
-	string	stars, bars, dashes;
-	string	fName = "mazeDataFile.txt";
-	stars.append(65, '*');
-	bars.append(65, '=');
-	dashes.append(40,'-');
-	const char* bold   = "\033[1m";
-	const char* unbold   = "\033[0m";
-	bool	doPrint=false;
-
-	cout << "Maze Generator" << unbold << endl;
+	cout << "Maze Generator" << endl;
 	cout << endl;
 
-// ------------------------------------------------------------------
-//  Check argument
-
+    // shortcut to enable printing
 	if (argc == 2){
 		if (string(argv[1]) == "-p"){
 			doPrint = true;
 			std::cout << "Console print enabled\n";
 		}
 	}else{
+        // give the user another chance to enable console print
 		char ans;
 		std::cout << "Console print is disabled by default( -p cmd arg ), Enable?(Y/N): ";
 		std::cin >> ans;
 		if(toupper(ans) == 'Y'){
 			doPrint = true;
 			std::cout << "Console print enabled\n";
-		}else{
+		}else if(toupper(ans) == 'N'){
 			std::cout << "Console print disabled\n";
-		}
+		}else
+            std::cout << "Unrecognized input... disabling console print\n";
 	}
+    // ignore the line feed read in by CIN so our first loop doesn't read a \n and exit right away
 	std::cin.ignore(256, '\n');
 	std::cout << "\n\n------------------------------------------------------------------\n";
-// ------------------------------------------------------------------
-//  Begin loop
+
 	int rows, cols;
 	std::string input;
-    std::string path;
+    // loop indefintely
 	while(true){
+        // parse user input
 		std::cout << "Enter the number of ROWS and COLS(return to exit): ";
 		std::getline(cin, input);
 		if(input == "")
 			break;
-		parseInput(input, rows, cols);
-		//ask for input until user gets it right
+		if(!parseInput(input, rows, cols)) {
+            std::cout << "unrecognized input... exiting\n";
+            break;
+        }
 		if(rows < 5 || cols < 5){
 			while(true) {
 				rows < 5 ? std::cout << "Rows cannot be less than 5" : std::cout << "Cols cannot be less than 5";
 				std::cout << ". Renter ROWS followed by the number of COLS(e.g. 5 15): ";
-				std::cin >> rows >> cols;
+                std::getline(cin, input);
+				if(!parseInput(input, rows, cols))
+                    continue;
 				if(rows >= 5 && cols >= 5)
 					break;
 			}
 		}
+        // create maze
 		std::cout << "\ncreating maze...\n";
 		mazeGen obj(rows, cols);
 		std::cout << "done, generating maze...\n";
+        // generate solvable maze
 		obj.generate();
+        // if console print enabled print blank maze
+        if(doPrint){
+            std::cout << std::endl;
+            obj.printMazeText();
+            std::cout << std::endl;
+        }
+        // create file
 		std::cout << "done, creating data file...\n";
 		obj.printMazeData(fName);
-		std::cout << "done, calling solver...\n";
-        obj.findPath();
-		std::cout << "done...\n";
-		//if(doPrint){
-			//std::cout << ", printing solution...\n\n";
-			//obj.printMazeText();
-		//}else
-			std::cout << "...\n";
+        // read file and print solution
+		std::cout << "done, printing solution...\n\n";
+	    obj.findPath();
+       std::cout << std::endl;
 	}
-// *****************************************************************
-//  All done.
-	std::cout << "\nexiting...\n";
 	return 0;
 }
 
-void parseInput(std::string input, int& row, int& col)
+bool parseInput(std::string input, int& row, int& col)
 {
 	std::stringstream ss(input);
 	ss >> row >> col;
+    return !ss.fail();
 }

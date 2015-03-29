@@ -213,8 +213,8 @@ void mazeGen::findPath()
     std::vector< std::vector<char> > maze_map;
     typedef std::istreambuf_iterator<char> buf_iter;
     std::fstream file("mazeDataFile.txt");
-    std::vector<char> tmp;
-    maze_map.push_back(tmp);                    // push back initial front wall
+    std::vector<char> tmp;                      // create a vector that we can use to create the boarders
+    maze_map.push_back(tmp);                    // push back top wall, this will initially be empty
     tmp.push_back('|');                         // create left wall for each row
     for(buf_iter i(file), e; i != e; ++i) {     // loop file
         char c = *i;                            // get char
@@ -227,17 +227,11 @@ void mazeGen::findPath()
             tmp.push_back(c);                   // push char into row
         }    
     }
-    tmp.clear();                        // clear tmp
+    tmp.clear();                                // clear tmp
     std::fill_n(back_inserter(maze_map[0]), maze_map[1].size(), '-');
     std::fill_n(back_inserter(tmp), maze_map[1].size(), '-');
-    maze_map.push_back(tmp);
+    maze_map.push_back(tmp);                    
 
-    for(int i = 0; i < maze_map.size(); i++) {
-        for(int j = 0; j < maze_map[0].size(); j++) {
-            std::cout << maze_map[i][j];
-        }    
-        std::cout << std::endl;
-    }
     std::string route = AStar::findPath(2, 1, maze_map.size()-2, maze_map[0].size()-3, AStar::makeReadyMap(maze_map));
     int x = 0;
     int y = 0;
@@ -246,13 +240,11 @@ void mazeGen::findPath()
         int j = atoi(&c);
         x = x + dx[j];
         y = y + dy[j];
-        //std::cout << x+2 << "," << y+2 << std::endl;
-        maze_map[x+2][y+1] = 'X';
+        maze_map[x+2][y+1] = 'x';
     }
-    maze_map[1][2] = 'O';
-    maze_map[maze_map.size()-2][maze_map[0].size()-3] = 'E';
-    for(int i = 0; i < maze_map.size(); i++) {
-        for(int j = 0; j < maze_map[0].size(); j++) { 
+    maze_map[1][2] = 'x';
+    for(int i = 1; i < maze_map.size()-1; i++) {
+        for(int j = 1; j < maze_map[0].size()-1; j++) { 
             std::cout << maze_map[i][j];
         }
         std::cout << std::endl;
