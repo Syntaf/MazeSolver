@@ -209,6 +209,7 @@ namespace AStar {
 
     std::vector<std::vector<int> > makeReadyMap(const std::vector<std::vector<char> >& map)
     {
+        // turn map of characters into map of 0's (open) and 1's (closed)
         std::vector<std::vector<int> > resmap(map.size());
         for(int r = 0; r < map.size(); r++) {
             for(int c = 0; c < map[0].size(); c++) {
