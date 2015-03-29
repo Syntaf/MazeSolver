@@ -20,7 +20,7 @@ int main(int argc, char *argv[])
 	const string fName = "mazeDataFile.txt";
 	bool doPrint = false;
 
-	cout << "Maze Generator" << endl;
+	cout << "Maze Generator v" << VERSION_MAJOR << "." << VERSION_MINOR << endl;
 	cout << endl;
 
     // shortcut to enable printing
