@@ -6,7 +6,7 @@
 #include "astar.hpp"
 #include "mazeGen.hpp"
 #include "disjointSets.hpp"
- 
+
 bool comp (int *i, int *j) { return i[0] < j[0]; }
 
 mazeGen::mazeGen(int t_rows, int t_cols):
@@ -89,11 +89,11 @@ void mazeGen::generate()
 
 bool mazeGen::printMazeData(const std::string filename) const
 {
-  std::ofstream outFile(filename.c_str());
-  if(!outFile.is_open())
+    std::ofstream outFile(filename.c_str());
+    if(!outFile.is_open())
     return false;
     
-  outFile << "+  +";
+    outFile << "+  +";
     for(int i = 0; i < cols-1; i++)
         outFile << "--+";
     outFile << std::endl;

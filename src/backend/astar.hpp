@@ -6,16 +6,7 @@
 #include <math.h>
 #include <ctime>
 
-void printMap(std::vector<std::vector<int> > &map)
-{
-    for(int r = 0; r < map.size(); r++) {
-        for(int c = 0; c < map[0].size(); c++) {
-            std::cout << map[r][c];
-        }
-        std::cout << std::endl;
-    }
-}
-
+// solver is only allowed to move up,down,left,right
 const int dir=4;
 static int dx[dir] = {1, 0, -1, 0};
 static int dy[dir] = {0, 1, 0, -1};
@@ -31,6 +22,7 @@ class node
 			priority(p)
 		{}
 
+        // get functions
 		int getxPos() const {return xPos;}
 		int getyPos() const {return yPos;}
 		int getLevel() const {return level;}

@@ -12,8 +12,6 @@
 
 using namespace std;
 
-const char * SCRIPT = "pySolve.py";
-
 bool parseInput(std::string input, int& row, int& col);
 
 int main(int argc, char *argv[])
