@@ -9,6 +9,10 @@ Unsolved | Solved
 
 Your only limitation to the size of the maze is the sky itself (well, and the size of your console and monitor I guess). 
 
+Usage
+------
+`./MazeSolver -p` runs the program with print functionality, or just run it with `./MazeSolver` . Super simple!
+
 Building
 ----------------------------------------------------
 There's no dependencies for this repo, *yay!*. All you need to worry about it building the project
