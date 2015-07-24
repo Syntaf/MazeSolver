@@ -33,4 +33,7 @@ Windows
 
 Linux
 ---------
-1. `cmake /path/to/repository/source/tree`
+1. Clone the repository (`git clone https://github.com/Syntaf/MazeSolver`)
+2. `cd MazeSolver`
+3. `cmake .` (or path to directory containing CMakeLists.txt)
+4. `make`
