@@ -33,7 +33,10 @@ Windows
 
 Linux
 ---------
-1. Clone the repository (`git clone https://github.com/Syntaf/MazeSolver`)
-2. `cd MazeSolver`
-3. `cmake .` (or path to directory containing CMakeLists.txt)
-4. `make`
+1. Clone the repository: `git clone https://github.com/Syntaf/MazeSolver`
+
+2. Navigate to the project: `cd MazeSolver`  
+
+3. Build internal depedencies with CMake: `cmake .` (or path to directory containing CMakeLists.txt)  
+
+4. Build executable: `make`
