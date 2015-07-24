@@ -1,7 +1,7 @@
 MazeSolver
 ==========
 
-An application designed to generate random **solvable** mazes of *any* size, and solve them! The program uses an implementation of the A* algorithm to solve these mazes, clone the repo and give it a try yourself!
+An application designed to generate random **solvable** mazes of *any* size, and solve them! The program uses an implementation of the A* algorithm to solve these mazes. Clone the repo and give it a try yourself!
 
 Unsolved | Solved
 :-------:|:------:
@@ -15,15 +15,15 @@ Usage
 
 Building
 ----------------------------------------------------
-There's no dependencies for this repo, *yay!*. All you need to worry about it building the project
+There are no dependencies for this repo, *yay!* All you need to worry about is building the project.
 
 Windows
 ---------
 1. Clone the master MazeSolver repository in a directory of your choice.
 
-2. Create a build folder. This project requires and out-of-tree build. This means you ~will be unable to~ **should not** run CMake in the MazeGen folder
+2. Create a build folder. This project requires and out-of-tree build. This means you ~will be unable to~ **should not** run CMake in the MazeGen folder.
 
-3. Open up the CMake GUI. in the input box labelled "Where is the source code:", enter the full path to the source folder. In the input box labelled "Where to build the binaries" , enter the full path to the folder you created in step 2.
+3. Open up the CMake GUI. in the input box labeled "Where is the source code:", enter the full path to the source folder. In the input box labeled "Where to build the binaries" , enter the full path to the folder you created in step 2.
 
 4. Press the "Configure" button. A window will pop up asking you which compiler to use. Selecter any version your heart desires but this tutorial will center around VS, so we're going to select to build a VS project. 
 
