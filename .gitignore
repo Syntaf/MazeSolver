@@ -1,1 +1,5 @@
+# OSX user preferences
+.DS_Store
+
+# Internal deps
 /build

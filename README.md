@@ -9,10 +9,6 @@ Unsolved | Solved
 
 Your only limitation to the size of the maze is the sky itself (well, and the size of your console and monitor I guess). 
 
-Usage
-------
-`./MazeSolver -p` runs the program with print functionality, or just run it with `./MazeSolver` . Super simple!
-
 Building
 ----------------------------------------------------
 There are no dependencies for this repo, *yay!* All you need to worry about is building the project.
@@ -33,4 +29,14 @@ Windows
 
 Linux
 ---------
-1. `cmake /path/to/repository/source/tree`
+1. Clone the repository: `git clone https://github.com/Syntaf/MazeSolver`
+
+2. Navigate to the project: `cd MazeSolver`  
+
+3. Build internal depedencies with CMake: `cmake .` (or path to directory containing CMakeLists.txt)  
+
+4. Build executable: `make`
+
+Usage
+------
+`./MazeSolver -p` runs the program with print functionality, or just run it with `./MazeSolver` . Super simple!
