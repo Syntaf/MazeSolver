@@ -3,6 +3,7 @@
 #include <iomanip>
 #include <queue>
 #include <string>
+#include <cstddef>
 #include <math.h>
 #include <ctime>
 
@@ -203,8 +204,8 @@ namespace AStar {
     {
         // turn map of characters into map of 0's (open) and 1's (closed)
         std::vector<std::vector<int> > resmap(map.size());
-        for(int r = 0; r < map.size(); r++) {
-            for(int c = 0; c < map[0].size(); c++) {
+        for(std::size_t r = 0; r < map.size(); r++) {
+            for(std::size_t c = 0; c < map[0].size(); c++) {
                 if(map[r][c] != ' ') {
                     resmap[r].push_back(1);
                 }else{

@@ -226,7 +226,7 @@ void mazeGen::findPath()
     //parse the string and print contents
     int x = 0;
     int y = 0;
-    for(int i = 0; i < route.length(); i++) {
+    for(std::size_t i = 0; i < route.length(); i++) {
         char c = route[i];
         int j = atoi(&c);
         x = x + dx[j];
@@ -237,8 +237,8 @@ void mazeGen::findPath()
     maze_map[1][2] = 'x';
 
     // print our solved map not including boarders
-    for(int i = 1; i < maze_map.size()-1; i++) {
-        for(int j = 1; j < maze_map[0].size()-1; j++) { 
+    for(std::size_t i = 1; i < maze_map.size()-1; i++) {
+        for(std::size_t j = 1; j < maze_map[0].size()-1; j++) { 
             std::cout << maze_map[i][j];
         }
         std::cout << std::endl;
