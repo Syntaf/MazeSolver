@@ -140,6 +140,8 @@ bool mazeGen::printMazeData(const std::string filename) const
         outFile << "+--";
     outFile << "+  +";
     outFile << std::endl;
+
+    return true;
 }
 
 void mazeGen::printMazeText() const
