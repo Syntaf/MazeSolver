@@ -28,6 +28,9 @@ int main(int argc, char *argv[])
         if (string(argv[1]) == "-p"){
             doPrint = true;
             std::cout << "Console print enabled\n";
+        }else{
+            // ignore the line feed read in by CIN so our first loop doesn't read a \n and exit right away IF user didnt pass in -p flag
+            std::cin.ignore(256, '\n');
         }
     }else{
         // give the user another chance to enable console print
@@ -41,9 +44,9 @@ int main(int argc, char *argv[])
             std::cout << "Console print disabled\n";
         }else
             std::cout << "Unrecognized input... disabling console print\n";
+        // ignore the line feed read in by CIN so our first loop doesn't read a \n and exit right away IF user didnt pass in -p flag
+        std::cin.ignore(256, '\n');
     }
-    // ignore the line feed read in by CIN so our first loop doesn't read a \n and exit right away
-    std::cin.ignore(256, '\n');
     std::cout << "\n\n------------------------------------------------------------------\n";
 
     int rows, cols;

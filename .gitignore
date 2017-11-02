@@ -3,3 +3,12 @@
 
 # Internal deps
 /build
+
+# Byproducts of running cmake and make
+CMakeCache.txt
+CMakeFiles/
+Makefile
+MazeSolver
+cmake_install.cmake
+config.h
+mazeDataFile.txt
